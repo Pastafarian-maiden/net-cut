@@ -1,3 +1,3 @@
-module net-cut
+module TCPChat
 
 go 1.19

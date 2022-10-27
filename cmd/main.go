@@ -1,10 +1,10 @@
 package main
 
 import (
+	"TCPChat/internal"
 	"fmt"
 	"log"
 	"net"
-	"net-cut/internal"
 	"os"
 	"strconv"
 )
@@ -14,18 +14,19 @@ func main() {
 	switch len(os.Args) {
 	case 1:
 		port = "8989"
-		fmt.Printf("Listening on the port :%v", port)
 	case 2:
-		port, err := strconv.Atoi(os.Args[1])
+		_, err := strconv.Atoi(os.Args[1])
 		if err != nil {
 			fmt.Println("Argument shoud be integer for port variable")
 			return
 		}
-		fmt.Printf("Listening on the port :%v", port)
+		port = os.Args[1]
 	default:
 		fmt.Println("[USAGE]: ./TCPChat $port")
 		return
 	}
+	fmt.Printf("Listening on the port : %v", port)
+
 	listener, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Fatal(err)
